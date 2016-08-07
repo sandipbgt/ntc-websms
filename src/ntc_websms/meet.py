@@ -39,10 +39,9 @@ class Meet:
             'loginPage': 'true'
         }
 
-        print("Logging in...")
+        print("Sending SMS.")
         response = self.session.post(self.login_url, payload)
-        f = open('f.html', 'w')
-        f.write(response.text)
+
         tree = html.fromstring(response.content)
         try:
             message = tree.xpath('//li[@class="elgg-message elgg-state-error"]/text()')[0]
@@ -71,7 +70,6 @@ class Meet:
             'sendbutton': 'Send Now'
         }
 
-        print("Sending SMS.")
         response = self.session.post(self.send_sms_url, payload)
         tree = html.fromstring(response.content)
         try:
